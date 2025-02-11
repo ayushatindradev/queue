@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+class Queue
+{
+public:
+    Node *head;
+    Node *tail;
+    int size;
+    Queue()
+    {
+        this->head = NULL;
+        this->tail = NULL;
+        size = 0;
+    }
+    void enqueue(int data)
+    {
+        Node *newnode = new Node(data);
+        if (this->head == NULL)
+        {
+            // ll is empty
+            head = tail = newnode;
+            return;
+        }
+        else
+        {
+            // tail par add hoga
+            this->tail->next = newnode;
+            this->tail = newnode;
+        }
+        this->size++;
+    }
+    void dequeue()
+    {
+        Node *temp = this->head;
+        if (this->head == NULL)
+        {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+        else
+        {
+            this->head = this->head->next;
+
+            delete temp;
+        }
+        if (this->head == NULL)
+        {
+            // If queue becomes empty, ensure tail is also NULL
+            this->tail = NULL;
+        }
+        size--;
+        int getFront()
+        {
+            return this->head->data;
+        }
+    }
+    void dequeue1()
+    {
+        if (this->head == NULL)
+        {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+        Node *temp = this->head;
+        this->head = this->head->next;
+        delete temp;
+    }
+    bool isEmpty()
+    {
+        return (this->head == NULL);
+    }
+    int getSize()
+    {
+        return this->size;
+    }
+};
+int main()
+{
+    //
+}
