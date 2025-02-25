@@ -1,6 +1,87 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
+void reveraQueue(queue<int> &queue)
+{
+    stack<int> st;
+    while (!queue.empty())
+    {
+        int curr = queue.front();
+        st.push(curr);
+        queue.pop();
+    }
+    while (!st.empty())
+    {
+        int curr = st.top();
+        queue.push(curr);
+        st.pop();
+    }
+    // printing the queue
+    while (!queue.empty())
+    {
+        int curr = queue.front();
+        cout << curr << " ";
+        queue.pop();
+    }
+}
+class Queue
+{
+    int arr[5], front, rear;
+
+public:
+    Queue()
+    {
+        front = -1;
+        rear = -1;
+    }
+    void enqueue(int x)
+    {
+        if (rear == 4)
+        {
+            cout << "Queue is full. Cannot enqueue more elements." << endl;
+            return;
+        }
+        else
+        {
+            rear++;
+            arr[rear] = x;
+        }
+    }
+    void dequeue()
+    {
+        if (front == -1 && rear == -1)
+        {
+            cout << "Queue is empty. Cannot dequeue." << endl;
+            return;
+        }
+        else
+        {
+            front++;
+        }
+    }
+    void display()
+    {
+        for (int i = 0; i < arr.size(); i++)
+        {
+            cout << arr[i] << " ";
+        }
+    }
+};
+void reverseQueue(queue<int> &q)
+{
+    stack<int> s;
+    while (!q.empty())
+    {
+        s.push(q.front());
+        q.pop();
+    }
+    while (!s.empty())
+    {
+        q.push(s.top());
+        s.pop();
+    }
+}
 int main()
 {
     //    1. Create an empty queue and display its size.
@@ -71,18 +152,318 @@ int main()
     // cout<<"Size after removing :" <<q.size()<<endl;
     // 10. Use std::queue from STL and perform basic operations (push, pop, front, size).
 
+    // queue<int> q;
+    // q.push(5);
+    // q.push(15);
+    // q.push(25);
+
+    // cout << "Front element :" << q.front() << endl;
+    // cout << "Queue size :" << q.size() << endl;
+
+    // q.pop();
+
+    // cout << "Front element after pop :" << q.front() << endl;
+    // cout << "Queue size after pop :" << q.size() << endl;
+    // 1. Implement a Queue using STL
+    // queue<int> q;
+    // q.push(10);
+    // q.push(20);
+    // cout<<q.front() << endl;
+    // q.pop();
+    // cout<<q.front()<<endl;
+    // 2. Check if Queue is Empty
+    // queue<int> q;
+    // cout<<(q.empty()? "Empty":"NotEmpty")<<endl;
+    // q.push(10);
+    // cout<<(q.empty()?"Empty":"NOn empty")<<endl;
+    // 3. Find Size of Queue
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // cout<<"Size :"<<q.size()<<endl;
+    // q.pop();
+    // cout<<"Size :"<<q.size()<<endl;
+    // 4. Print All Elements of a Queue
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+
+    // queue<int>temp =q;
+    // while(temp.empty()!=NULL)
+    // {
+    //     cout<<temp.front()<<" ";
+    //     temp.pop();
+    // }
+    // 5. Implement a Queue using Array
+    // 6. Reverse a Queue
+    // 7. Implement a Circular Queue
+    // 8. Find the Front Element of a Queue
+    // queue<int> q;
+    // q.push(10);
+    // q.push(20);
+    // cout<<"Front :"<<q.front()<<endl;
+    // 9. Find the Rear Element of a Queue
+    // queue<int> q;
+    // q.push(10);
+    // q.push(20);
+    // cout<<"Rear :"<<q.back()<<endl;
+
+    // 1. Create an Empty Queue
+    // queue<int> q;
+    // cout<<"Queue created!"<<endl;
+    // 2. Insert One Element into Queue
+    // queue<int> q;
+    // q.push(42);
+    // cout<<q.front();
+    // 3. Remove the Only Element from Queue
+    // queue<int> q;
+    // q.push(99);
+    // q.pop();
+    // if(q.empty()){
+    //     cout<<"Queue is empty now!"<<endl;
+    // }
+    // else{
+    //     cout<<"Queue still has elements!"<<endl;
+    // }
+    // 4. Insert Three Elements and Print Last
+    // queue<int> q;
+    // q.push(5);
+    // q.push(10);
+    // q.push(15);
+    // cout<<q.back();
+    // 5. Remove Two Elements and Print Front
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // q.pop();
+    // q.pop();
+    // cout<<q.front();
+    // 6. Check Queue Size After Insertions
+    // queue<int> q;
+    // q.push(7);
+    // q.push(14);
+    // q.push(21);
+    // q.push(28);
+    // cout<<"Queue size "<<q.size();
+    // 7. Clear the Queue
+    // queue<int> q;
+    // q.push(4);
+    // q.push(8);
+    // q.push(12);
+    // while(!q.empty()){
+    //     q.pop();
+    // }
+    // cout<<"Now queue is empty"<<endl;
+    // // 8. Print Queue Without Removing Elements
+    // queue<int> q;
+    // q.push(2);
+    // q.push(4);
+    // q.push(6);
+    // queue<int> temp = q;
+    // while(!temp.empty()){
+    //     cout<<temp.front()<<" ";
+    //     temp.pop();
+    // }
+    // 9. Check If Front and Back Are Same
+    // queue<int> q;
+    // q.push(8);
+    // if(q.front()==q.back()){
+    //     couut<<"Front and Back are same";
+    // }
+    // 10. Fill Queue and Remove Until Empty
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // q.push(4);
+
+    // while(!q.empty()) {
+    //     cout<<"Removing "<<q.front()<<endl;
+    //     q.pop();
+    // }
+    // 1. Create an Empty Queue
+    // queue<int> q;
+    // 2. Insert One Element
+    // q.push(1);
+
+    // 3. Check if Queue is Empty
+    // cout<<q.empty();
+    // 4. Print Queue Size
+    // queue<int> q;
+    // cout<<q.size();
+    // 5. Insert and Print One Element
+    // queue<int> q;
+    // q.push(25);
+    // cout<<q.front();
+    // 6. Insert Two Elements
+    // queue<int> q;
+    // q.push(5);
+    // q.push(10);
+    // // 7. Print Front of Queue
+    // queue<int> q;
+    // q.push(100);
+    // cout<<q.front();
+    // 8. Print Back of Queue
+    // queue<int> q;
+    // q.push(50);
+    // cout<<q.back();
+    // 9. Remove One Element
+    // queue<int> q;
+    // q.push(10);
+    // q.pop();
+    // 10. Insert Three Elements
+
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // q.push(4);
+    // 11. Remove Two Elements
+    // queue<int> q;
+    // q.push(5);
+    // q.push(10);
+    // q.push(15);
+    // q.pop();
+    // q.pop();
+    // 12. Check Size After Insertion
+
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // q.push(4);
+    // cout<<q.size()<<endl;
+
+    // 13. Clear the Queue
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.pop();
+    // q.pop();
+    // 14. Print After Removing
+    // queue<int> q;
+    // q.push(10);
+    // q.push(20);
+    // q.pop();
+    // cout<<q.front();
+    // 15. Check Queue After Removing
+    // queue<int> q;
+    // q.push(5);
+    // q.pop();
+    // cout<<q.empty();
+    // 16. Print First Two Elements
+    // queue<int> q;
+    // q.push(3);
+    // q.push(6);
+    // cout<<q.front()<<" "<<q.back();
+    // 17. Print All Elements
+    // queue<int> q;
+    // q.push(1);
+    // q.push(2);
+    // q.push(3);
+    // queue<int> temp =q;
+    // while(!temp.empty()){
+    //     cout<<temp.front()<<" ";
+    //     temp.pop();
+    // }
+    // 18. Remove Until Empty
+    // queue<int> q;
+    // q.push(2);
+    // q.push(4);
+    // q.push(6);
+    // while(!q.empty()){
+    //     q.pop();
+    // }
+    // 19. Insert and Print Both Ends
+    // queue<int> q;
+    // q.push(50);
+    // q.push(100);
+    // cout<<q.front();
+    // cout<<endl;
+    // cout<<q.back();
+    // 20. Insert and Remove, Check Size
+
+    // queue<int> q;
+    // q.push(7);
+    // q.push(14);
+    // q.push(21);
+    // q.pop();
+    // cout<<q.size();
+    // 1. Create an empty queue.
     queue<int> q;
+    2. Declare a queue of integers.queue<int> q;
+    3. Declare a queue of characters.queue<int> q;
+    4. Declare a queue of strings.queue<string> q;
+    5. Declare a queue of floating - point numbers.queue<float> q;
+    6. Check if a queue is empty.queue<int> q;
+    cout << q.empty();
+    7. Print the size of an empty queue.queue<int> q;
+    cout << q.size();
+    8. Create a queue and immediately delete it.queue<int> q;
+    9. Create a queue, insert one element, then delete it.queue<int> q;
+    q.push(10);
+    q.pop();
+    10. Check if a queue is still empty after inserting and deleting one element.queue<int> q;
+    q.push(10);
+    q.pop();
+    cout << q.empty();
+
+    11. Insert 10 into a queue.queue<int> q;
+    q.push(10);
+    12. Insert 5 and 15 into a queue.queue<int> q;
     q.push(5);
     q.push(15);
-    q.push(25);
-
-    cout << "Front element :" << q.front() << endl;
-    cout << "Queue size :" << q.size() << endl;
-
+    13. Insert 3, 6, 9 into a queue.queue<int> q;
+    q.push(3);
+    q.push(6);
+    q.push(9);
+    14. Insert 1, 2, 3, 4, 5 into a queue.queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+    15. Insert the same number(7) three times into a queue.queue<int> q;
+    q.push(7);
+    q.push(7);
+    q.push(7);
+    16. Insert a character 'A' into a queue.queue<char> q;
+    q.push('A');
+    17. Insert the string "Hello" into a queue.queue<string> q;
+    q.push("Hello");
+    18. Insert a floating - point number 3.14 into a queue.queue<float> q;
+    q.push(3.14);
+    19. Insert 0 into a queue and check if it is stored.queue<int> q;
+    q.push(0);
+    cout << q.front();
+    20. Insert a negative number - 5 into a queue.queue<int> q;
+    q.push(-5);
+    21. Insert 10, remove it, and check if the queue is empty.queue<int> q;
+    q.push(10);
     q.pop();
+    cout << q.empty();
 
-    cout << "Front element after pop :" << q.front() << endl;
-    cout << "Queue size after pop :" << q.size() << endl;
+    22. Insert 5, 10, remove 5, print front.queue<int> q;
+    q.push(5);
+    q.push(10);
+    q.pop();
+    cout << q.front();
+
+    23. Insert 1, 2, 3, remove 1, print new front.queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.pop();
+    cout << q.front();
+
+    31. Insert 25, print front and back.queue<int> q;
+    q.push(2);
+    q.push(4);
+    q.push(6);
+    cout << q.front();
 
     return 0;
 }
