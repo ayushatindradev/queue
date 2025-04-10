@@ -1,0 +1,277 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+using namespace std;
+void reverseQueue(queue<int> &q)
+{
+    stack<int> s;
+    while (!q.empty())
+    {
+        s.push(q.front());
+        q.pop();
+    }
+    while (!s.empty())
+    {
+        q.push(s.top());
+        s.pop();
+    }
+}
+
+void reverseUsingRecursion(queue<int> &q)
+{
+    // base case when the queue is empty
+    if (q.empty())
+    {
+        return;
+    }
+    // pop the front element and store it in a variable
+
+    int temp = q.front();
+    // then remove the front element from the queue
+    q.pop();
+    // call the function recursively
+    reverseUsingRecursion(q);
+    // push the stored element to the back of the queue
+    q.push(temp);
+}
+void reverseKElements(queue<int> &q, int k)
+{
+    stack<int> s;
+    // push the first k elements into the stack
+    for (int i = 0; i < k; i++)
+    {
+        s.push(q.front());
+        q.pop();
+    }
+    // pop the elements from the stack and push them back to the queue
+    while (!s.empty())
+    {
+        q.push(s.top());
+        s.pop();
+    }
+    // now push the remaining elements to the back of the queue
+    // most important part
+    for (int i = 0; i < q.size() - k; i++)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+}
+void reverseKusingRecursion(queue<int> &q, int k)
+{
+    // base case when the queue is empty
+    if (q.empty() || k <= 0)
+    {
+        return;
+    }
+    // pop the front element and store it in a variable
+    int temp = q.front();
+    // then remove the front element from the queue
+    q.pop();
+    // call the function recursively
+    reverseKusingRecursion(q, k - 1);
+    // push the stored element to the back of the queue
+    q.push(temp);
+    // now push the remaining elements to the back of the queue
+
+    // most important part
+
+    for (int i = 0; i < q.size() - k; i++)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+}
+void InterleaveFirstAndSecondHalf(queue<int> &q)
+{
+    int n = q.size();
+    queue<int> q1;
+    queue<int> q2;
+    // push the first half of the queue into q1
+    for (int i = 0; i < n / 2; i++)
+    {
+        q1.push(q.front());
+        q.pop();
+    }
+    // push the second half of the queue into q2
+    for (int i = 0; i < n / 2; i++)
+    {
+        q2.push(q.front());
+        q.pop();
+    }
+    // interleave the two queues
+    while (!q1.empty() && !q2.empty())
+    {
+        q.push(q1.front());
+        q1.pop();
+        q.push(q2.front());
+        q2.pop();
+    }
+}
+void firstNegativeIntergerInEveryWindow(queue<int> &q, int k)
+{
+    queue<int> q1;
+    queue<int> q2;
+    // push the first k elements into q1
+    for (int i = 0; i < k; i++)
+    {
+        if (q.front() < 0)
+        {
+            q1.push(q.front());
+        }
+        q2.push(q.front());
+        q.pop();
+    }
+    // push the remaining elements into q2
+    while (!q.empty())
+    {
+        if (q.front() < 0)
+        {
+            q1.push(q.front());
+        }
+        q2.push(q.front());
+        q.pop();
+    }
+    // now push the first negative integer from q1 into q
+    while (!q2.empty())
+    {
+        if (!q1.empty())
+        {
+            q.push(q1.front());
+            q1.pop();
+        }
+        else
+        {
+            q.push(0);
+        }
+        // pop the first k elements from q2
+        for (int i = 0; i < k - 1; i++)
+        {
+            q2.push(q2.front());
+            q2.pop();
+        }
+        // push the next element from q2 into q1
+        if (!q2.empty() && q2.front() < 0)
+        {
+            q1.push(q2.front());
+        }
+        // pop the first element from q2
+        q2.pop();
+    }
+    // now push the remaining elements from q2 into q
+    while (!q2.empty())
+    {
+        q.push(q2.front());
+        q2.pop();
+    }
+}
+void printFirstNegative(int *arr, int n, int k)
+{
+    deque<int> dq;
+    // process first k elements of the array
+    for (int index = 0; index < k; index++)
+    {
+        int element = arr[index];
+        if (element < 0)
+        {
+            dq.push_back(index);
+        }
+    }
+    // process rest of the elements
+    for (int index = k; index < n; index++)
+    {
+        // removal
+        if (index - dq.front() >= k)
+        {
+            dq.pop_front();
+        }
+        // addition
+        if (arr[index] < 0)
+        {
+            dq.push_back(index);
+        }
+    }
+}
+void printFirstNegative(int *arr, int n, int k)
+{
+    deque<int> dq;
+
+    // Process the first k elements of the array
+    for (int index = 0; index < k; index++)
+    {
+        if (arr[index] < 0)
+        {
+            dq.push_back(index);
+        }
+    }
+
+    // Process the rest of the elements
+    for (int index = k; index < n; index++)
+    {
+        // Print the first negative element in the previous window
+        if (!dq.empty())
+        {
+            cout << arr[dq.front()] << " ";
+        }
+        else
+        {
+            cout << "0 "; // If there is no negative number, print 0
+        }
+
+        // Remove indices that are out of the current window
+        while (!dq.empty() && dq.front() <= index - k)
+        {
+            dq.pop_front();
+        }
+
+        // Add the current element index if it's negative
+        if (arr[index] < 0)
+        {
+            dq.push_back(index);
+        }
+    }
+
+    // Print the first negative number for the last window
+    if (!dq.empty())
+    {
+        cout << arr[dq.front()] << endl;
+    }
+    else
+    {
+        cout << "0" << endl;
+    }
+}
+
+int main() int main()
+{
+    queue<int> q;
+    q.push(2);
+    q.push(-5);
+    q.push(4);
+    q.push(-1);
+    q.push(-2);
+    q.push(0);
+    q.push(5);
+
+    // using the stack to reverse the queue
+    // reverseQueue(q);
+    // using recursion to reverse a queue
+    // reverseUsingRecursion(q);
+    // reverseKusingRecursion(q, 2);
+    // InterleaveFirstAndSecondHalf(q);
+    // firstNegativeIntergerInEveryWindow(q,3);
+    // while (!q.empty())
+    // {
+    //     cout << q.front() << " ";
+    //     q.pop();
+    // }
+    int arr[] = {2, -5, 4, -1, -2, 0, 5};
+    int n = 7;
+    int k = 3;
+    printFirstNegative(arr, n, k);
+    // printFirstNegative(arr,n,k);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
