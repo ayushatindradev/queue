@@ -1,0 +1,48 @@
+
+#include <iostream>
+#include<deque>
+using namespace std;
+void printFirstNegative(int arr[],int n ,int k){
+    deque<int> dq;
+    // process first window 
+    for(int i=0;i<k;i++){
+        int element = arr[i];
+        if(element <0){
+            dq.push_back(i);
+        }
+    }
+    // process remaing window 
+    for(int i=k;i<n;i++){
+         if(dq.empty()){
+        cout<<"0 "; 
+    }
+    else{
+        cout<<arr[dq.front()]<<" ";
+    }
+        // removal 
+        if(i-dq.front()>=k ){
+            dq.pop_front();
+        }
+       if(arr[i]<0){
+           dq.push_back(i);
+       }
+        // adition 
+        
+    }
+    // last window ka dhayan alag se rakhana 
+    if(dq.empty()){
+        cout<<"0 "; 
+    }
+    else{
+        cout<<arr[dq.front()]<<" ";
+    }
+    
+}
+int main() {
+    int arr[]={2,-5,4,-1,-2,0,5};
+    int k= 3;
+    int n= 7;
+    printFirstNegative(arr,n,k);
+
+    return 0;
+}
